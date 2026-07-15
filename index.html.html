@@ -1,1067 +1,1116 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David R. Hawkins - Mapa Świadomości, Uwalnianie i Programowanie</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Letting Go: Uwalnianie Nałogów wg dr. Davida R. Hawkinsa</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        hawkins: {
-                            slate: '#1e293b',
-                            indigo: '#4f46e5',
-                            emerald: '#10b981',
-                            amber: '#f59e0b',
-                            rose: '#f43f5e',
-                            purple: '#8b5cf6',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
         }
-        /* Custom scrollbar */
+        .breathing-ring {
+            transition: transform 4s ease-in-out, background-color 4s ease-in-out;
+        }
+        .breath-inhale {
+            transform: scale(1.4);
+            background-color: rgba(99, 102, 241, 0.3);
+        }
+        .breath-hold {
+            transform: scale(1.4);
+            background-color: rgba(168, 85, 247, 0.4);
+        }
+        .breath-exhale {
+            transform: scale(1.0);
+            background-color: rgba(59, 130, 246, 0.2);
+        }
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+            background: #1e293b;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+            background: #475569;
+            border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        /* Pulse animations */
-        @keyframes subtle-pulse {
-            0%, 100% { transform: scale(1); opacity: 0.95; }
-            50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 30px rgba(167, 139, 250, 0.4); }
-        }
-        .energy-ball-active {
-            animation: subtle-pulse 3s infinite ease-in-out;
-        }
-        /* Floating particles for release effect */
-        @keyframes float-particle {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100px) scale(0); opacity: 0; }
-        }
-        .particle {
-            position: absolute;
-            animation: float-particle 1.5s forwards ease-out;
+            background: #64748b;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-    <!-- NAWIGACJA -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-indigo-200">
-                        H
-                    </div>
-                    <span class="font-bold text-slate-900 tracking-tight text-sm sm:text-base hidden xs:block">Psychologia Hawkinsa</span>
+    <!-- -->
+    <!-- NAGŁÓWEK -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-gradient-to-tr from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/20">
+                    <i class="fa-solid fa-feather-pointed text-xl text-white"></i>
                 </div>
-                <div class="flex space-x-1 sm:space-x-3 text-xs sm:text-sm font-semibold">
-                    <a href="#kim-byl" class="px-3 py-2 text-slate-600 hover:text-indigo-600 transition">O autorze</a>
-                    <a href="#mapa" class="px-3 py-2 text-slate-600 hover:text-indigo-600 transition">Mapa</a>
-                    <a href="#deprogramowanie" class="px-3 py-2 text-slate-600 hover:text-indigo-600 transition">Deprogramowanie</a>
-                    <a href="#uwalnianie" class="px-3 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition">Uwalnianie</a>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Technika Uwalniania (Letting Go)
+                    </h1>
+                    <p class="text-xs text-slate-400 font-medium">Metoda dr. Davida R. Hawkinsa na uwalnianie nałogów</p>
                 </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- HERO / NAGŁÓWEK -->
-    <header class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-850 to-slate-900 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.15),transparent_45%)]"></div>
-        <div class="absolute -bottom-16 -left-16 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
-        
-        <div class="relative max-w-4xl mx-auto text-center">
-            <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 mb-6">
-                Zintegrowany Przewodnik & Narzędzia Doświadczalne
-            </span>
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">
-                David R. Hawkins
-            </h1>
-            <p class="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
-                Poznaj Mapę Poziomów Świadomości, zgłębiaj sztukę deprogramowania ego i uwolnij stłumiony ładunek emocjonalny za pomocą interaktywnych ćwiczeń.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#uwalnianie" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-lg shadow-indigo-950/30 hover:from-indigo-600 hover:to-purple-700 transform hover:-translate-y-0.5 transition duration-200">
-                    Rozpocznij Uwalnianie
-                </a>
-                <a href="#mapa" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700/50 hover:border-slate-600 transition">
-                    Eksploruj Mapę Świadomości
-                </a>
-            </div>
+            
+            <nav class="flex items-center gap-1 sm:gap-2">
+                <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-800 text-indigo-400">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>Panel
+                </button>
+                <button onclick="switchTab('process')" id="btn-tab-process" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800/50">
+                    <i class="fa-solid fa-play mr-1.5 text-emerald-400 animate-pulse"></i>Rozpocznij Uwalnianie
+                </button>
+                <button onclick="switchTab('map')" id="btn-tab-map" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800/50">
+                    <i class="fa-solid fa-layer-group mr-1.5"></i>Mapa Świadomości
+                </button>
+                <button onclick="switchTab('theory')" id="btn-tab-theory" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800/50">
+                    <i class="fa-solid fa-book-open mr-1.5"></i>O Metodzie
+                </button>
+            </nav>
         </div>
     </header>
 
-    <!-- GŁÓWNY KONTENER -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-
-        <!-- O AUTORZE -->
-        <section id="kim-byl" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-100 shadow-sm scroll-mt-20">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div class="md:col-span-7 space-y-4">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                        Kim był dr David R. Hawkins?
+    <!-- GŁÓWNA TREŚĆ -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 md:py-10">
+        
+        <!-- -->
+        <!-- ZAKŁADKA 1: PANEL GŁÓWNY (DASHBOARD) -->
+        <section id="tab-dashboard" class="tab-content block space-y-6">
+            <!-- Powitalny banner -->
+            <div class="relative overflow-hidden bg-gradient-to-r from-slate-900 to-indigo-950/40 border border-indigo-900/40 rounded-2xl p-6 md:p-8 shadow-2xl">
+                <div class="absolute right-0 top-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-2xl">
+                    <span class="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-300 text-xs font-semibold rounded-full border border-indigo-500/20 mb-4">
+                        <i class="fa-solid fa-shield-heart mr-1.5"></i>Przekraczanie Siły Wolą na rzecz Poddania
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">
+                        Uwolnij emocjonalne źródło swojego nałogu
                     </h2>
-                    <div class="h-1 w-20 bg-indigo-500 rounded"></div>
-                    <div class="text-slate-600 leading-relaxed space-y-4 text-justify">
-                        <p>
-                            <strong>Dr David R. Hawkins</strong> (1927–2012) był wybitnym amerykańskim psychiatrą, klinicystą, badaczem i nauczycielem duchowym. Jako członek Amerykańskiego Towarzystwa Psychiatrycznego kierował jedną z największych klinik psychiatrycznych w Nowym Jorku.
-                        </p>
-                        <p>
-                            Szerokie uznanie przyniosło mu opracowanie <strong>Mapy Poziomów Świadomości</strong>, łączącej koncepcje fizyki nieliniowej, biologii i teorii chaosu z mechaniką ludzkiego umysłu. Hawkins udowodnił, że ludzka psychika operuje na określonych poziomach energetycznych, które bezpośrednio warunkują to, jak postrzegamy rzeczywistość.
-                        </p>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6">
+                        Walka z nałogiem (silna wola) stawia opór i generuje napięcie. Zamiast walczyć, rozpuść wewnętrzny ból i głód, uwalniając nagromadzone emocje leżące u podstaw Twojego nawyku.
+                    </p>
+                    <button onclick="startNewSession()" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0">
+                        <i class="fa-solid fa-fire-flame-simple text-amber-300 animate-pulse"></i>
+                        Uwolnij obecny głód nałogowy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statystyki -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xl">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Ukończone sesje</p>
+                        <h4 id="stat-sessions-count" class="text-2xl font-bold text-slate-100">0</h4>
                     </div>
                 </div>
-                <div class="md:col-span-5 bg-gradient-to-br from-slate-50 to-indigo-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-center">
-                    <div class="text-4xl text-indigo-400 mb-4">“</div>
-                    <blockquote class="text-slate-700 italic text-lg leading-relaxed mb-4">
-                        Zrozum, że wszystko, co widzisz w świecie zewnętrznym, jest jedynie projekcją twojego własnego poziomu świadomości.
-                    </blockquote>
-                    <cite class="text-sm font-bold text-slate-900 block not-italic">— Dr David R. Hawkins</cite>
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Średni spadek napięcia</p>
+                        <h4 id="stat-avg-relief" class="text-2xl font-bold text-slate-100">0%</h4>
+                    </div>
                 </div>
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 text-xl">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Ostatnio uwalniana emocja</p>
+                        <h4 id="stat-last-emotion" class="text-2xl font-bold text-slate-100">-</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historia uwalniania -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-slate-200">
+                        <i class="fa-solid fa-history text-indigo-400 mr-2"></i>Historia Twoich uwalniań
+                    </h3>
+                    <button onclick="clearHistory()" class="text-xs text-slate-500 hover:text-rose-400 transition-colors flex items-center gap-1">
+                        <i class="fa-regular fa-trash-can"></i> Wyczyść historię
+                    </button>
+                </div>
+                
+                <div id="history-container" class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                    <!-- Dynamicznie ładowana historia -->
+                    <div class="text-center py-8 text-slate-500">
+                        <i class="fa-regular fa-folder-open text-3xl mb-2 block"></i>
+                        Nie zarejestrowano jeszcze żadnej sesji. Kliknij "Rozpocznij Uwalnianie" powyżej, aby zacząć.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cytat Hawkinsa -->
+            <div class="border-l-4 border-purple-500 bg-purple-950/20 rounded-r-xl p-5 italic text-slate-300 text-sm">
+                "Uwalnianie polega na uświadomieniu sobie danego uczucia, pozwaniu mu na zaistnienie, pozostaniu z nim i pełnym wyczerpaniu jego energii bez próby zmieniania go, stawiania mu oporu czy tłumienia." 
+                <span class="block mt-2 font-semibold text-xs text-slate-400 not-italic">— Dr David R. Hawkins, "Technika Uwalniania"</span>
             </div>
         </section>
 
-        <!-- MAPA ŚWIADOMOŚCI (INTERAKTYWNA) -->
-        <section id="mapa" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-100 shadow-sm scroll-mt-20">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                    Interaktywna Mapa Świadomości
-                </h2>
-                <div class="h-1 w-20 bg-indigo-500 rounded mx-auto mt-3 mb-4"></div>
-                <p class="text-slate-600 text-sm sm:text-base">
-                    Skala Hawkinsa (1–1000) dzieli ludzkie doświadczenie na <strong>Moc (Power)</strong> – budującą i harmonijną, oraz <strong>Siłę (Force)</strong> – niszczącą i oporującą. Punktem zwrotnym jest Odwaga (200).
-                </p>
-            </div>
-
-            <!-- FILTRY MAPY -->
-            <div class="flex justify-center gap-2 mb-8 bg-slate-100 p-1.5 rounded-xl max-w-md mx-auto">
-                <button onclick="filterMap('all')" id="btn-filter-all" class="flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition bg-white text-slate-900 shadow-sm">
-                    Wszystkie
-                </button>
-                <button onclick="filterMap('power')" id="btn-filter-power" class="flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition text-slate-600 hover:text-slate-900">
-                    Moc (≥ 200)
-                </button>
-                <button onclick="filterMap('force')" id="btn-filter-force" class="flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition text-slate-600 hover:text-slate-900">
-                    Siła (< 200)
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <!-- LEWA KOLUMNA: Drabina Świadomości -->
-                <div class="lg:col-span-7 space-y-2 max-h-[600px] overflow-y-auto pr-2" id="ladder-container">
-                    
-                    <!-- Oświecenie -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-yellow-100 bg-yellow-50/40 hover:bg-yellow-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('enlightenment')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Oświecenie / Pokój / Radość</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-yellow-200/60 text-yellow-800 font-mono text-xs font-bold">540 - 1000</span>
+        <!-- -->
+        <!-- ZAKŁADKA 2: PROCES UWALNIANIA (KREATOR KROK PO KROKU) -->
+        <section id="tab-process" class="tab-content hidden max-w-3xl mx-auto">
+            
+            <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl relative">
+                <!-- Pasek postępu kroku -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider mb-2">
+                        <span>Krok <span id="current-step-num">1</span> z 5</span>
+                        <span id="step-name">Definiowanie Intencji</span>
                     </div>
-
-                    <!-- Miłość -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-pink-100 bg-pink-50/40 hover:bg-pink-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('love')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Miłość</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-pink-200/60 text-pink-800 font-mono text-xs font-bold">500</span>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div id="step-progress-bar" class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full w-1/5 transition-all duration-500 ease-out"></div>
                     </div>
-
-                    <!-- Rozsądek -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-sky-100 bg-sky-50/40 hover:bg-sky-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('reason')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Rozsądek / Intelekt</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-sky-200/60 text-sky-800 font-mono text-xs font-bold">400</span>
-                    </div>
-
-                    <!-- Akceptacja -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-emerald-100 bg-emerald-50/40 hover:bg-emerald-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('acceptance')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Akceptacja</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-emerald-200/60 text-emerald-800 font-mono text-xs font-bold">350</span>
-                    </div>
-
-                    <!-- Ochota -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-purple-100 bg-purple-50/40 hover:bg-purple-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('willingness')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Ochota / Optymizm</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-purple-200/60 text-purple-800 font-mono text-xs font-bold">310</span>
-                    </div>
-
-                    <!-- Neutralność -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-amber-100 bg-amber-50/40 hover:bg-amber-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('neutrality')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Neutralność</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-amber-200/60 text-amber-800 font-mono text-xs font-bold">250</span>
-                    </div>
-
-                    <!-- Odwaga -->
-                    <div class="map-item level-power flex items-center justify-between p-3 rounded-xl border border-orange-200 bg-orange-50 hover:bg-orange-100 cursor-pointer transition transform hover:-translate-x-1 ring-2 ring-orange-400 ring-offset-1" onclick="selectLevel('courage')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
-                            <span class="font-bold text-orange-950 text-sm sm:text-base flex items-center gap-2">
-                                Odwaga <span class="text-[10px] bg-orange-600 text-white px-1.5 py-0.5 rounded font-mono font-medium">PRZEŁOM</span>
-                            </span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-orange-200 text-orange-900 font-mono text-xs font-bold">200</span>
-                    </div>
-
-                    <div class="text-center py-1 text-slate-400 text-xs font-bold tracking-widest border-y border-dashed border-slate-200 my-2">Granica Siły i Mocy</div>
-
-                    <!-- Duma -->
-                    <div class="map-item level-force flex items-center justify-between p-3 rounded-xl border border-amber-200/70 bg-amber-50/20 hover:bg-amber-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('pride')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Duma</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-amber-100/60 text-amber-900 font-mono text-xs font-bold">175</span>
-                    </div>
-
-                    <!-- Złość -->
-                    <div class="map-item level-force flex items-center justify-between p-3 rounded-xl border border-red-100 bg-red-50/30 hover:bg-red-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('anger')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Złość</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-red-200/60 text-red-800 font-mono text-xs font-bold">150</span>
-                    </div>
-
-                    <!-- Pożądanie -->
-                    <div class="map-item level-force flex items-center justify-between p-3 rounded-xl border border-orange-100 bg-orange-50/20 hover:bg-orange-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('desire')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-orange-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Pożądanie / Żądza</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-orange-150 text-orange-800 font-mono text-xs font-bold">125</span>
-                    </div>
-
-                    <!-- Strach -->
-                    <div class="map-item level-force flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-100/40 hover:bg-slate-100 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('fear')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Strach</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 font-mono text-xs font-bold">100</span>
-                    </div>
-
-                    <!-- Żal, Apatia, Wina, Wstyd -->
-                    <div class="map-item level-force flex items-center justify-between p-3 rounded-xl border border-red-200 bg-red-50/10 hover:bg-red-50 cursor-pointer transition transform hover:-translate-x-1" onclick="selectLevel('lowvibrations')">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-slate-900"></span>
-                            <span class="font-bold text-slate-800 text-sm sm:text-base">Żal, Apatia, Wina, Wstyd</span>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-slate-900 text-white font-mono text-xs font-bold">20 - 75</span>
-                    </div>
-
                 </div>
 
-                <!-- PRAWA KOLUMNA: Detal Wybranego Poziomu -->
-                <div class="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-150 self-stretch flex flex-col justify-between" id="level-detail-card">
-                    <!-- Dynamiczna zawartość ładowana przez JS -->
-                    <div class="space-y-6">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold uppercase tracking-widest text-orange-600 bg-orange-50 px-2.5 py-1 rounded-lg">Punkt Przełomowy</span>
-                            <span class="text-3xl font-extrabold text-orange-600 font-mono">200</span>
-                        </div>
+                <!-- KROK 1: Zdefiniowanie nałogu i intencji -->
+                <div id="step-1" class="step-pane space-y-6">
+                    <div class="text-center space-y-2">
+                        <h3 class="text-xl font-bold text-white">Co wywołuje w Tobie teraz wewnętrzny głód?</h3>
+                        <p class="text-slate-400 text-sm">Zidentyfikuj nałóg, zachowanie lub impuls, od którego chcesz się dziś uwolnić.</p>
+                    </div>
+
+                    <div class="space-y-4">
                         <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Odwaga</h3>
-                            <p class="text-slate-500 text-sm mt-1">To tutaj zaczyna się autentyczna Moc i branie odpowiedzialności za własne życie.</p>
+                            <label class="block text-xs font-semibold uppercase tracking-wide text-indigo-400 mb-2">Wybierz lub wpisz zachowanie:</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
+                                <button onclick="selectHabitPreset('Smartfon / Media Społecznościowe')" class="preset-btn px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    📱 Social Media / Telefon
+                                </button>
+                                <button onclick="selectHabitPreset('Słodycze / Objadanie się')" class="preset-btn px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    🍫 Słodycze / Jedzenie
+                                </button>
+                                <button onclick="selectHabitPreset('Alkohol / Używki')" class="preset-btn px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    🍷 Alkohol / Używki
+                                </button>
+                                <button onclick="selectHabitPreset('Kupowanie / Zakupy')" class="preset-btn px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    🛍️ Zakupy online
+                                </button>
+                                <button onclick="selectHabitPreset('Praca / Pracoholizm')" class="preset-btn px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    💻 Pracoholizm
+                                </button>
+                                <button onclick="selectHabitPreset('Hazard / Gry')" class="preset-btn px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    🎮 Gry / Hazard
+                                </button>
+                            </div>
+                            <input type="text" id="input-habit" placeholder="Lub wpisz własny (np. palenie papierosów, obgryzanie paznokci)..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
                         </div>
-                        <div class="grid grid-cols-2 gap-4 text-xs sm:text-sm">
-                            <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                <span class="text-slate-400 block mb-0.5">Widok Życia</span>
-                                <span class="font-semibold text-slate-800">Ekscytujące / Wyzwanie</span>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wide text-indigo-400 mb-2">Określ początkową siłę przymusu (głodu):</label>
+                            <div class="flex items-center gap-4">
+                                <input type="range" id="input-intensity-before" min="1" max="10" value="7" class="flex-grow accent-indigo-500 h-2 bg-slate-800 rounded-lg cursor-pointer">
+                                <span id="intensity-before-value" class="text-xl font-bold text-indigo-400 w-8 text-center">7</span>
                             </div>
-                            <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                <span class="text-slate-400 block mb-0.5">Widok Boga</span>
-                                <span class="font-semibold text-slate-800">Umożliwiający</span>
-                            </div>
-                            <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                <span class="text-slate-400 block mb-0.5">Emocja</span>
-                                <span class="font-semibold text-slate-800">Potwierdzenie</span>
-                            </div>
-                            <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                <span class="text-slate-400 block mb-0.5">Proces</span>
-                                <span class="font-semibold text-slate-800">Upełnomocnienie</span>
+                            <div class="flex justify-between text-xxs text-slate-500 px-1 mt-1">
+                                <span>Lekki dyskomfort (1)</span>
+                                <span>Nie do zniesienia (10)</span>
                             </div>
                         </div>
-                        <div class="bg-white p-4 rounded-xl border border-slate-100">
-                            <h4 class="font-semibold text-slate-900 text-sm mb-1.5">Charakterystyka:</h4>
-                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
-                                Odwaga to krytyczny poziom na Mapie Świadomości. To na tym etapie następuje odejście od postawy ofiary (typowej dla stanów poniżej 200). Pojawia się prawdziwa siła witalna do stawiania czoła wyzwaniom życiowym, chęć do nauki oraz eksplorowania nowych ścieżek rozwoju.
+
+                        <div class="p-4 bg-indigo-950/20 border border-indigo-900/30 rounded-xl space-y-2">
+                            <h4 class="text-xs font-bold text-indigo-300 uppercase"><i class="fa-solid fa-bullseye mr-1.5"></i>Intencja Poziomu Odwagi (200)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Zamiast walki, zmieniamy nastawienie. Twoja deklaracja brzmi: <strong class="text-indigo-200">"Wybieram spojrzeć prawdzie w oczy i poczuć to, przed czym uciekam. Chcę wolności zamiast chwilowej ulgi."</strong>
                             </p>
                         </div>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-6 text-center">Kliknij dowolny poziom z listy po lewej, aby zobaczyć szczegóły.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- PROGRAMOWANIE I DEPROGRAMOWANIE UMYSŁU -->
-        <section id="deprogramowanie" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-100 shadow-sm scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <span class="text-xs font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50 px-3 py-1.5 rounded-full">Metafora komputera</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
-                    Programowanie i Deprogramowanie Umysłu
-                </h2>
-                <div class="h-1 w-20 bg-indigo-500 rounded mx-auto mt-3 mb-4"></div>
-                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    Nasz umysł od dzieciństwa wgrywa automatyczne oprogramowanie: przekonania, lęki, nawyki i uprzedzenia. Prawdziwy rozwój to proces <strong>odinstalowywania wirusów ego</strong>.
-                </p>
-            </div>
-
-            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 sm:p-8 rounded-2xl border border-indigo-100 mb-10">
-                <h3 class="text-lg font-bold text-indigo-950 mb-2 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Fundamentalne Prawo Umysłu wg dr. Hawkinsa
-                </h3>
-                <p class="text-indigo-900 text-sm sm:text-base italic leading-relaxed">
-                    "To, co utrzymujesz w umyśle, ma tendencję do manifestowania się w fizycznym świecie. Umysł nie potrafi odróżnić prawdy od fałszu. Akceptuje jako obiektywną prawdę wszystko, co zasilasz swoją uwagą, emocjami i głęboką wiarą."
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Krok 1 -->
-                <div class="bg-slate-50 hover:bg-slate-100/75 p-6 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold font-mono text-sm">1</span>
-                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Krok Pierwszy</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-slate-900 mb-2">Higiena Informacyjna (Oczyszczanie wejścia)</h4>
-                        <p class="text-slate-600 text-sm text-justify leading-relaxed mb-4">
-                            Każda wiadomość, plotka, film pełen przemocy czy negatywne interakcje działają jak wirusy programujące podświadomość na Strach lub Gniew (stany poniżej 200). Nie możesz przeprogramować umysłu, jeśli stale karmisz go toksynami.
-                        </p>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200/60 mt-auto">
-                        <strong class="text-xs font-bold text-slate-900 uppercase tracking-wide block mb-1">💡 Praktyczne Zadanie:</strong>
-                        <p class="text-xs text-slate-500">Zrób tygodniowy detoks od sensacyjnych portali i toksycznych dyskusji. Monitoruj, co wpada do Twojego umysłu.</p>
-                    </div>
-                </div>
-
-                <!-- Krok 2 -->
-                <div class="bg-slate-50 hover:bg-slate-100/75 p-6 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold font-mono text-sm">2</span>
-                            <span class="text-xs font-semibold text-indigo-600 uppercase tracking-widest">Krok Drugi</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-indigo-900 mb-2">Potęga Intencji (A nie siła woli)</h4>
-                        <p class="text-slate-600 text-sm text-justify leading-relaxed mb-4">
-                            Większość ludzi próbuje zmieniać nawyki "siłą woli" (z poziomu oporu ego). Siła ta generuje tarcie, frustrację i szybko się wyczerpuje. Hawkins uczy zarządzania poprzez czystą Intencję – cichą, głęboką decyzję o zmianie bez napiętego przywiązania do wyniku.
-                        </p>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200/60 mt-auto">
-                        <strong class="text-xs font-bold text-indigo-900 uppercase tracking-wide block mb-1">💡 Praktyczne Zadanie:</strong>
-                        <p class="text-xs text-slate-500">Zamiast zmuszać się do zmiany, codziennie rano powiedz sobie w ciszy: "Wybieram spokój i otwartość na nowe rozwiązania".</p>
-                    </div>
-                </div>
-
-                <!-- Krok 3 -->
-                <div class="bg-slate-50 hover:bg-slate-100/75 p-6 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold font-mono text-sm">3</span>
-                            <span class="text-xs font-semibold text-emerald-600 uppercase tracking-widest">Krok Trzeci</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-emerald-900 mb-2">Rekontekstualizacja (Zmiana ramy)</h4>
-                        <p class="text-slate-600 text-sm text-justify leading-relaxed mb-4">
-                            Zdarzenia same w sobie są neutralne – to umysł nadaje im etykiety. Deszcz nie jest zły; po prostu pada. Utrata pracy może być postrzegana jako tragedia (Strach, 100) lub jako niesamowita szansa na odnalezienie nowej, lepszej drogi zawodowej (Odwaga, 200).
-                        </p>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200/60 mt-auto">
-                        <strong class="text-xs font-bold text-emerald-900 uppercase tracking-wide block mb-1">💡 Praktyczne Zadanie:</strong>
-                        <p class="text-xs text-slate-500">Gdy spotka Cię trudność, zapytaj siebie: "Jak mogę na to spojrzeć inaczej? Jaka szansa kryje się w tym wyzwaniu?"</p>
-                    </div>
-                </div>
-
-                <!-- Krok 4 -->
-                <div class="bg-slate-50 hover:bg-slate-100/75 p-6 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold font-mono text-sm">4</span>
-                            <span class="text-xs font-semibold text-purple-600 uppercase tracking-widest">Krok Czwarty</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-purple-900 mb-2">Kwestionowanie ukrytych korzyści ego</h4>
-                        <p class="text-slate-600 text-sm text-justify leading-relaxed mb-4">
-                            Ego uwielbia "mieć rację", oceniać innych i tkwić w roli uciemiężonej ofiary. Czerpie z tego specyficzną, ukrytą korzyść energetyczną. Dopóki nie zauważysz, jak bardzo Twój umysł chce cierpieć, aby udowodnić swoją rację, proces deprogramowania będzie blokowany.
-                        </p>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200/60 mt-auto">
-                        <strong class="text-xs font-bold text-purple-900 uppercase tracking-wide block mb-1">💡 Praktyczne Zadanie:</strong>
-                        <p class="text-xs text-slate-500">Złap się na narzekaniu i zadaj sobie pytanie z pełną uczciwością: "Co zyskuję, czując się teraz pokrzywdzonym?"</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TECHNIKA UWALNIANIA (LETTING GO) & ĆWICZENIE -->
-        <section id="uwalnianie" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 border border-slate-850 shadow-2xl relative overflow-hidden scroll-mt-20">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.1),transparent_40%)]"></div>
-            
-            <div class="relative z-10 max-w-3xl mx-auto text-center mb-12">
-                <span class="text-xs font-bold tracking-wider text-indigo-400 uppercase bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 rounded-full">Metodologia Praktyczna</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-3">
-                    Praktyka: Technika Uwalniania (Letting Go)
-                </h2>
-                <div class="h-1 w-20 bg-indigo-500 rounded mx-auto mt-3 mb-4"></div>
-                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                    Fundamentem uwalniania jest poddanie stłumionego ładunku emocjonalnego. Zamiast tłumić uczucia lub agresywnie je wyrażać, pozwalamy im wypalić się w polu naszej świadomej uwagi.
-                </p>
-            </div>
-
-            <!-- METODOLOGIA W 4 KROKACH -->
-            <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40">
-                    <span class="text-xs font-bold text-indigo-400 uppercase block mb-1">Krok 1</span>
-                    <h4 class="font-bold text-white mb-2">Zauważenie</h4>
-                    <p class="text-slate-300 text-xs sm:text-sm text-justify leading-relaxed">
-                        Stań się w pełni świadomy danego uczucia. Nie staraj się go od razu nazywać ani zmieniać. Pozwól mu po prostu zaistnieć w ciele.
-                    </p>
-                </div>
-                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40">
-                    <span class="text-xs font-bold text-indigo-400 uppercase block mb-1">Krok 2</span>
-                    <h4 class="font-bold text-white mb-2">Pozwolenie</h4>
-                    <p class="text-slate-300 text-xs sm:text-sm text-justify leading-relaxed">
-                        Pozwól uczuciu być obecnym. Nie stawiaj mu oporu. Zrozum, że to opór i ucieczka przed emocją utrzymują ją stale przy życiu.
-                    </p>
-                </div>
-                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40">
-                    <span class="text-xs font-bold text-indigo-400 uppercase block mb-1">Krok 3</span>
-                    <h4 class="font-bold text-white mb-2">Wejście w energię</h4>
-                    <p class="text-slate-300 text-xs sm:text-sm text-justify leading-relaxed">
-                        Zignoruj generowane przez umysł myśli (historie, obwinianie). Skup się wyłącznie na fizycznym doznaniu w ciele (ścisk, puls, ciężar).
-                    </p>
-                </div>
-                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40">
-                    <span class="text-xs font-bold text-indigo-400 uppercase block mb-1">Krok 4</span>
-                    <h4 class="font-bold text-white mb-2">Odpuszczenie</h4>
-                    <p class="text-slate-300 text-xs sm:text-sm text-justify leading-relaxed">
-                        Trwaj w obserwacji fizycznego napięcia tak długo, aż jego intensywność zacznie maleć. Skumulowana energia emocjonalna wypali się naturalnie.
-                    </p>
-                </div>
-            </div>
-
-            <!-- INTERAKTYWNE ĆWICZENIE "NA ŻYWO" -->
-            <div class="relative z-10 max-w-2xl mx-auto bg-slate-850 rounded-2xl border border-slate-750 p-6 sm:p-8 text-center space-y-6">
-                <div>
-                    <h3 class="text-xl sm:text-2xl font-bold">Interaktywny Przewodnik Medytacyjny</h3>
-                    <p class="text-xs sm:text-sm text-slate-400 mt-1">Zlokalizuj trudne uczucie, którego aktualnie doświadczasz. Wizualizuj je w postaci poniższej kuli energii.</p>
-                </div>
-
-                <!-- ENERGIA SFERY -->
-                <div class="relative py-12 flex justify-center items-center">
-                    <div id="glow-container" class="absolute w-44 h-44 rounded-full bg-indigo-500/10 blur-2xl"></div>
-                    <!-- KULA EMOCJI -->
-                    <button id="feeling-ball" class="energy-ball-active relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-rose-500 via-indigo-600 to-purple-500 shadow-[0_0_25px_rgba(167,139,250,0.3)] transition-all duration-700 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/50 flex items-center justify-center cursor-pointer">
-                        <span class="text-xs font-bold tracking-wider uppercase text-white/90 drop-shadow-md select-none" id="ball-text">POCZUJ</span>
-                    </button>
-                </div>
-
-                <!-- STATUS I KONTROLA -->
-                <div class="space-y-4">
-                    <div id="exercise-status" class="text-sm sm:text-base text-slate-200 italic min-h-[48px] max-w-md mx-auto leading-relaxed">
-                        Zidentyfikuj napięcie w ciele. Kiedy będziesz gotowy/-a, kliknij kulę powyżej, aby przejść do kolejnego kroku...
-                    </div>
-
-                    <!-- Progress Indicator -->
-                    <div class="flex justify-center gap-1.5" id="progress-dots">
-                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 border border-indigo-500 transition-colors duration-300"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-700 border border-slate-600 transition-colors duration-300"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-700 border border-slate-600 transition-colors duration-300"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-700 border border-slate-600 transition-colors duration-300"></span>
-                    </div>
-
-                    <div class="pt-2 flex justify-center gap-4">
-                        <button onclick="resetExercise()" class="text-xs font-semibold text-slate-400 hover:text-white border border-slate-700 hover:border-slate-500 py-2 px-4 rounded-lg transition">
-                            Rozpocznij od nowa
+                    <div class="flex justify-end pt-4">
+                        <button onclick="goToStep(2)" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition-all duration-200 flex items-center gap-2">
+                            Dalej: Odkryj Emocję <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- NOWY MODUŁ: CYFROWY DZIENNIK UWALNIANIA -->
-        <section class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-100 shadow-sm">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 space-y-4">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                        Dziennik Uwalniania i Transformacji
-                    </h2>
-                    <div class="h-1 w-20 bg-indigo-500 rounded"></div>
-                    <p class="text-slate-600 text-sm leading-relaxed text-justify">
-                        Uzewnętrznianie myśli i nadawanie im formy pisemnej pomaga nabrać zbawiennego dystansu (Rozsądek, 400). Wpisz poniżej to, co Ci dzisiaj ciąży, wybierz poziom energetyczny na skali Hawkinsa i zobacz, jak Twój umysł uwalnia się od tego ładunku.
-                    </p>
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-500 leading-relaxed">
-                        <strong>Jak to działa?</strong><br>
-                        Gdy wpisujesz intencję i klikasz "Przeprowadź Uwolnienie", strona generuje proces wizualnego uwalniania, który pomaga psychologicznie "zamknąć" dany temat i odpuścić napięcie.
+                <!-- -->
+                <!-- KROK 2: Identyfikacja Emocjonalnego Źródła (Mapa Hawkinsa) -->
+                <div id="step-2" class="step-pane hidden space-y-6">
+                    <div class="text-center space-y-2">
+                        <h3 class="text-xl font-bold text-white">Co kryje się pod tym przymusem?</h3>
+                        <p class="text-slate-400 text-sm">Nałóg jest próbą ucieczki przed trudną emocją. Wybierz tę, którą czujesz w tle, gdy nie możesz natychmiast ulec nałogowi.</p>
                     </div>
-                </div>
 
-                <div class="lg:col-span-7 bg-slate-50 p-6 rounded-2xl border border-slate-150">
-                    <form id="journal-form" class="space-y-4" onsubmit="handleJournalSubmit(event)">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Co chcesz dziś uwolnić? (Myśl, emocja, sytuacja)</label>
-                            <input type="text" id="journal-input" required placeholder="np. lęk przed oceną innych, stres w pracy, żal do..." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition">
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Dominujący Stan</label>
-                                <select id="journal-state" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition bg-white">
-                                    <option value="Duma (175)">Duma (175)</option>
-                                    <option value="Złość (150)">Złość (150)</option>
-                                    <option value="Pożądanie (125)">Pożądanie (125)</option>
-                                    <option value="Strach (100)" selected>Strach (100)</option>
-                                    <option value="Żal (75)">Żal (75)</option>
-                                    <option value="Apatia (50)">Apatia (50)</option>
-                                    <option value="Wina (30)">Wina (30)</option>
-                                    <option value="Wstyd (20)">Wstyd (20)</option>
-                                </select>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[350px] overflow-y-auto pr-1">
+                        <!-- APATIA -->
+                        <div onclick="selectEmotion('Apatia (Energia: 50)', 'Brak energii, poczucie bezsilności, rezygnacja, depresja. Używka ma sztucznie pobudzić do życia.')" class="emotion-card p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-slate-300 text-sm">Apatia</span>
+                                <span class="text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full">50</span>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Intencja po uwolnieniu</label>
-                                <select id="journal-target" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition bg-white">
-                                    <option value="Odwaga (200)">Odwaga (200)</option>
-                                    <option value="Neutralność (250)" selected>Neutralność (250)</option>
-                                    <option value="Ochota (310)">Ochota (310)</option>
-                                    <option value="Akceptacja (350)">Akceptacja (350)</option>
-                                    <option value="Miłość (500)">Miłość (500)</option>
-                                </select>
-                            </div>
+                            <p class="text-xs text-slate-400">Rezygnacja, "po co się starać", bezsilność, pustka.</p>
                         </div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-slate-900 to-indigo-950 hover:from-indigo-900 hover:to-indigo-950 text-white font-semibold shadow-md transition duration-200 flex items-center justify-center gap-2">
-                            <span>Przeprowadź Uwolnienie</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                        <!-- ŻAL -->
+                        <div onclick="selectEmotion('Żal / Smutek (Energia: 75)', 'Poczucie straty, melancholia, żal za przeszłością. Nałóg działa jako pocieszenie.')" class="emotion-card p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-blue-400 text-sm">Żal / Smutek</span>
+                                <span class="text-xs bg-blue-950/40 text-blue-300 px-2 py-0.5 rounded-full">75</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Tęsknota, samotność, poczucie skrzywdzenia.</p>
+                        </div>
+                        <!-- STRACH -->
+                        <div onclick="selectEmotion('Strach / Lęk (Energia: 100)', 'Niepokój, lęk przed przyszłością, utratą kontroli. Nałóg służy znieczuleniu paniki i odprężeniu.')" class="emotion-card p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-amber-400 text-sm">Strach / Lęk</span>
+                                <span class="text-xs bg-amber-950/40 text-amber-300 px-2 py-0.5 rounded-full">100</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Niepokój, spięcie, obawa przed oceną, niepewność.</p>
+                        </div>
+                        <!-- POŻĄDANIE -->
+                        <div onclick="selectEmotion('Pożądanie / Chęć (Energia: 125)', 'Zasada wiecznego nienasycenia. „Muszę to mieć, inaczej nie będę szczęśliwy”. Silne poczucie braku.')" class="emotion-card p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-orange-400 text-sm">Pożądanie / Brak</span>
+                                <span class="text-xs bg-orange-950/40 text-orange-300 px-2 py-0.5 rounded-full">125</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Nienasycenie, chciwość, obsesja na punkcie celu.</p>
+                        </div>
+                        <!-- ZŁOŚĆ -->
+                        <div onclick="selectEmotion('Złość / Frustracja (Energia: 150)', 'Gdy pragnienie napotyka opór. Frustracja, nienawiść, bunt. Nałóg rozładowuje wewnętrzną wściekłość.')" class="emotion-card p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-rose-400 text-sm">Złość / Frustracja</span>
+                                <span class="text-xs bg-rose-950/40 text-rose-300 px-2 py-0.5 rounded-full">150</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Irytacja, zniecierpliwienie, uraza do kogoś/czegoś.</p>
+                        </div>
+                        <!-- DUMA -->
+                        <div onclick="selectEmotion('Duma / Egoizm (Energia: 175)', 'Zadufanie, opór przed przyznaniem się do błędu. Przekonanie: „sam nad tym panuję, nikogo nie potrzebuję”.')" class="emotion-card p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl cursor-pointer transition-all duration-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-purple-400 text-sm">Duma / Opór</span>
+                                <span class="text-xs bg-purple-950/40 text-purple-300 px-2 py-0.5 rounded-full">175</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Pycha, niechęć do zmiany zdania, "wiem lepiej".</p>
+                        </div>
+                    </div>
+
+                    <div id="selected-emotion-feedback" class="hidden p-4 bg-slate-900 border border-indigo-500/40 rounded-xl space-y-1">
+                        <h4 class="text-xs font-bold text-indigo-400 uppercase">Wybrana emocja-źródło:</h4>
+                        <p id="feedback-emotion-title" class="text-sm font-bold text-white"></p>
+                        <p id="feedback-emotion-desc" class="text-xs text-slate-300"></p>
+                    </div>
+
+                    <div class="flex justify-between pt-4 border-t border-slate-800">
+                        <button onclick="goToStep(1)" class="px-5 py-2 border border-slate-800 hover:bg-slate-900 text-slate-300 font-medium rounded-xl transition-colors">
+                            Wróć
                         </button>
-                    </form>
+                        <button id="btn-to-step-3" onclick="goToStep(3)" disabled class="px-6 py-2.5 bg-slate-800 text-slate-500 font-medium rounded-xl cursor-not-allowed transition-all duration-200 flex items-center gap-2">
+                            Dalej: Poczuj w Ciele <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
 
-                    <!-- Lista wpisów (Log) -->
-                    <div class="mt-6 pt-6 border-t border-slate-200/60">
-                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Twoja Ścieżka Uwalniania (Sesja)</h4>
-                        <div id="journal-entries" class="space-y-3 max-h-48 overflow-y-auto pr-1">
-                            <!-- Brak wpisów placeholder -->
-                            <p id="journal-empty" class="text-xs text-slate-400 italic text-center py-4">Brak wpisów w tej sesji. Wypełnij powyższy formularz.</p>
+                <!-- -->
+                <!-- KROK 3: Skanowanie Ciała & Skupienie uwagi -->
+                <div id="step-3" class="step-pane hidden space-y-6">
+                    <div class="text-center space-y-2">
+                        <h3 class="text-xl font-bold text-white">Przenieś uwagę z głowy do ciała</h3>
+                        <p class="text-slate-400 text-sm">Hawkins uczy, że emocje żyją jako fizyczna energia. Nie myśl o niej — po prostu zlokalizuj to odczucie fizycznie.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <!-- Interaktywna mapa ciała -->
+                        <div class="space-y-4">
+                            <label class="block text-xs font-semibold uppercase tracking-wide text-indigo-400 text-center md:text-left">Gdzie najwyraźniej czujesz fizyczne napięcie?</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="selectBodyLocation('Klatka piersiowa (ścisk, duszność)')" class="body-loc-btn px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 hover:border-purple-500 transition-colors flex items-center gap-2">
+                                    🫁 Klatka piersiowa
+                                </button>
+                                <button onclick="selectBodyLocation('Gardło (ścisk, gula w gardle)')" class="body-loc-btn px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 hover:border-purple-500 transition-colors flex items-center gap-2">
+                                    🗣️ Gardło / Szyja
+                                </button>
+                                <button onclick="selectBodyLocation('Splot słoneczny / Żołądek (skurcz)')" class="body-loc-btn px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 hover:border-purple-500 transition-colors flex items-center gap-2">
+                                    🤢 Żołądek / Brzuch
+                                </button>
+                                <button onclick="selectBodyLocation('Głowa / Czoło (napięcie, ucisk)')" class="body-loc-btn px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 hover:border-purple-500 transition-colors flex items-center gap-2">
+                                    🧠 Głowa / Czoło
+                                </button>
+                                <button onclick="selectBodyLocation('Mięśnie / Barki (sztywność, spięcie)')" class="body-loc-btn px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 hover:border-purple-500 transition-colors flex items-center gap-2">
+                                    💪 Barki i plecy
+                                </button>
+                                <button onclick="selectBodyLocation('Ogólny niepokój ruchowy (drżenie, pobudzenie)')" class="body-loc-btn px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 hover:border-purple-500 transition-colors flex items-center gap-2">
+                                    ⚡ Ogólne drżenie
+                                </button>
+                            </div>
                         </div>
+
+                        <!-- Wskazówka sensoryczna -->
+                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                            <h4 class="text-sm font-bold text-slate-200">Instrukcja skupienia:</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Wyobraź sobie, że to napięcie to po prostu <span class="text-indigo-400 font-semibold">fizyczna energia</span> o określonym kształcie, temperaturze czy gęstości. Nie walcz z nim. Pozwól mu być tam tak dużym, jakim jest. 
+                            </p>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Zadaj sobie pytanie: <em class="text-purple-300">"Czy to uczucie może we mnie teraz swobodnie istnieć?"</em>. Odpowiedź brzmi TAK. Ponieważ ono i tak już tam jest.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="selected-body-feedback" class="hidden text-center py-2 text-sm text-indigo-300 font-semibold">
+                        Wybrano obszar: <span id="feedback-body-text"></span>
+                    </div>
+
+                    <div class="flex justify-between pt-4 border-t border-slate-800">
+                        <button onclick="goToStep(2)" class="px-5 py-2 border border-slate-800 hover:bg-slate-900 text-slate-300 font-medium rounded-xl transition-colors">
+                            Wróć
+                        </button>
+                        <button id="btn-to-step-4" onclick="goToStep(4)" disabled class="px-6 py-2.5 bg-slate-800 text-slate-500 font-medium rounded-xl cursor-not-allowed transition-all duration-200 flex items-center gap-2">
+                            Dalej: Proces Oddechowy <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- -->
+                <!-- KROK 4: Zsynchronizowany Oddech & Pytania Uwalniające -->
+                <div id="step-4" class="step-pane hidden space-y-6">
+                    <div class="text-center space-y-2">
+                        <h3 class="text-xl font-bold text-white">Technika Uwalniania w Praktyce</h3>
+                        <p class="text-slate-400 text-sm">Wykorzystaj rytm oddechu, aby osłabić opór przed tą emocją. Postępuj zgodnie z komunikatami na ekranie.</p>
+                    </div>
+
+                    <!-- Animowany przewodnik oddechowy -->
+                    <div class="flex flex-col items-center justify-center p-6 bg-slate-900/40 rounded-2xl border border-slate-800">
+                        <div class="relative w-40 h-40 flex items-center justify-center mb-4">
+                            <!-- Zewnętrzny pulsujący okrąg -->
+                            <div id="breathing-circle" class="breathing-ring absolute w-28 h-28 rounded-full bg-indigo-500/20 flex items-center justify-center">
+                                <div class="w-16 h-16 rounded-full bg-indigo-600/40 flex items-center justify-center">
+                                    <i id="breathing-icon" class="fa-solid fa-wind text-white text-lg"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4 id="breathing-status" class="text-lg font-bold text-indigo-400 mb-1">Przygotowanie do oddechu...</h4>
+                            <p id="breathing-instruction" class="text-xs text-slate-400 max-w-sm mx-auto">Za chwilę rozpocznie się 4-fazowy oddech ułatwiający puszczenie kontroli.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pytania Uwalniające (Sedona / Hawkins) -->
+                    <div class="space-y-4">
+                        <p class="text-xs text-center font-bold uppercase tracking-wider text-purple-400">Interaktywne Pytania Uwalniające</p>
+                        <div class="grid grid-cols-1 gap-2">
+                            <!-- Pytanie 1 -->
+                            <div id="q1-box" class="p-3 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between gap-4">
+                                <span class="text-xs text-slate-300">1. Czy potrafisz powstrzymać chęć walki z tą emocją i pozwolić jej po prostu być?</span>
+                                <button onclick="answerQuestion(1)" id="q1-btn" class="px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-semibold rounded-lg transition-colors">Tak</button>
+                            </div>
+                            <!-- Pytanie 2 -->
+                            <div id="q2-box" class="p-3 bg-slate-900 border border-slate-800/50 rounded-xl opacity-50 flex items-center justify-between gap-4">
+                                <span class="text-xs text-slate-300">2. Czy możesz zrezygnować z chęci kontrolowania i zmiany tego, jak się czujesz?</span>
+                                <button onclick="answerQuestion(2)" id="q2-btn" disabled class="px-3 py-1 bg-slate-800 text-slate-500 text-xs font-semibold rounded-lg cursor-not-allowed">Tak</button>
+                            </div>
+                            <!-- Pytanie 3 -->
+                            <div id="q3-box" class="p-3 bg-slate-900 border border-slate-800/50 rounded-xl opacity-50 flex items-center justify-between gap-4">
+                                <span class="text-xs text-slate-300">3. Czy zgadzasz się zrezygnować z korzyści (pseudoukojenia), jaką daje ucieczka w nałóg?</span>
+                                <button onclick="answerQuestion(3)" id="q3-btn" disabled class="px-3 py-1 bg-slate-800 text-slate-500 text-xs font-semibold rounded-lg cursor-not-allowed">Tak</button>
+                            </div>
+                            <!-- Pytanie 4 -->
+                            <div id="q4-box" class="p-3 bg-slate-900 border border-slate-800/50 rounded-xl opacity-50 flex items-center justify-between gap-4">
+                                <span class="text-xs text-slate-300">4. Czy pozwalasz tej zablokowanej energii odejść? (Teraz lub za chwilę)</span>
+                                <button onclick="answerQuestion(4)" id="q4-btn" disabled class="px-3 py-1 bg-slate-800 text-slate-500 text-xs font-semibold rounded-lg cursor-not-allowed">Tak</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between pt-4 border-t border-slate-800">
+                        <button onclick="goToStep(3)" class="px-5 py-2 border border-slate-800 hover:bg-slate-900 text-slate-300 font-medium rounded-xl transition-colors">
+                            Wróć
+                        </button>
+                        <button id="btn-to-step-5" onclick="goToStep(5)" disabled class="px-6 py-2.5 bg-slate-800 text-slate-500 font-medium rounded-xl cursor-not-allowed transition-all duration-200 flex items-center gap-2">
+                            Zakończ i Zmierz Postęp <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- -->
+                <!-- KROK 5: Zakończenie i Pomiar Postępu -->
+                <div id="step-5" class="step-pane hidden space-y-6">
+                    <div class="text-center space-y-2">
+                        <h3 class="text-xl font-bold text-emerald-400">Poddanie nastąpiło</h3>
+                        <p class="text-slate-400 text-sm">Oddychaj głęboko i sprawdź, jak zmieniła się intensywność napięcia w Twoim ciele.</p>
+                    </div>
+
+                    <div class="space-y-6 py-4">
+                        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-3">
+                            <label class="block text-xs font-semibold uppercase tracking-wide text-emerald-400 text-center">Określ obecną siłę przymusu (0 - Brak głodu, wolność):</label>
+                            <div class="flex items-center gap-4">
+                                <input type="range" id="input-intensity-after" min="0" max="10" value="3" class="flex-grow accent-emerald-500 h-2 bg-slate-800 rounded-lg cursor-pointer">
+                                <span id="intensity-after-value" class="text-xl font-bold text-emerald-400 w-8 text-center">3</span>
+                            </div>
+                        </div>
+
+                        <!-- Wizualne porównanie przed/po -->
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                                <span class="block text-xxs text-slate-500 uppercase">Przed procesem</span>
+                                <span id="summary-before-val" class="text-3xl font-extrabold text-slate-400">-</span>
+                            </div>
+                            <div class="bg-emerald-950/20 p-4 rounded-xl border border-emerald-900/40">
+                                <span class="block text-xxs text-emerald-400 uppercase">Po procesie</span>
+                                <span id="summary-after-val" class="text-3xl font-extrabold text-emerald-400">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Krótkie notatki / refleksje -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold uppercase tracking-wide text-slate-400">Twoja refleksja (opcjonalnie):</label>
+                            <textarea id="session-note" rows="2" placeholder="Jak się teraz czujesz? (np. lżej na klatce, spokojniejszy umysł)..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center pt-4 border-t border-slate-800">
+                        <button onclick="saveAndCompleteSession()" class="px-8 py-3 bg-gradient-to-r from-emerald-500 to-indigo-600 hover:from-emerald-600 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg transition-all duration-300">
+                            Zapisz sesję w historii i wróć do panelu
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- -->
+        <!-- ZAKŁADKA 3: INTERAKTYWNA MAPA ŚWIADOMOŚCI -->
+        <section id="tab-map" class="tab-content hidden space-y-6">
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6">
+                <div class="max-w-2xl mx-auto text-center space-y-3 mb-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-white">Mapa Świadomości Davida R. Hawkinsa</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Kluczem do pokonania nałogu jest przekroczenie progu Odwagi (200), na którym bierzemy odpowiedzialność za swoje emocje, zamiast uciekać przed nimi w niższe stany. Przeanalizuj poziomy poniżej:
+                    </p>
+                </div>
+
+                <!-- Interaktywna mapa -->
+                <div class="max-w-3xl mx-auto border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+                    <!-- POZIOMY WYŻSZE -->
+                    <div class="p-3 bg-indigo-950/40 border-b border-indigo-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-indigo-950/60 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-indigo-400">500</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-indigo-200">Miłość (Love)</h4>
+                                <p class="text-xxs text-slate-400">Zjednoczenie, szacunek, bezwarunkowe dobro. Nałogi całkowicie znikają.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20">Wibracja Wolności</span>
+                    </div>
+
+                    <div class="p-3 bg-purple-950/20 border-b border-purple-900/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-purple-950/40 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-purple-400">350</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-purple-300">Akceptacja (Acceptance)</h4>
+                                <p class="text-xxs text-slate-400">Wybaczenie, harmonia. Rozumiesz, że nałóg był lekcją, a nie wyrokiem.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-full border border-purple-500/20">Wibracja Harmonii</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/80 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-slate-400">250</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-slate-200">Neutralność (Neutrality)</h4>
+                                <p class="text-xxs text-slate-400">Brak osądu, elastyczność. Poczucie bezpieczeństwa. Używasz rozumu, nie przymusu.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-slate-400 bg-slate-800 px-2.5 py-1 rounded-full border border-slate-700">Wibracja Stabilności</span>
+                    </div>
+
+                    <!-- PRÓG (ODWAGA) -->
+                    <div class="p-4 bg-emerald-950/30 border-b border-emerald-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-emerald-950/50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-sm font-extrabold text-emerald-400">200</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-emerald-300">Odwaga (Courage) — Próg Przemiany</h4>
+                                <p class="text-xxs text-slate-300">Bierzesz odpowiedzialność za swój stan. To tutaj zaczyna się autentyczna walka z nałogiem poprzez poddanie.</p>
+                            </div>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 font-bold">Kluczowy Próg</span>
+                    </div>
+
+                    <!-- POZIOMY EMOCJONALNEGO NAŁOGU (Niskie) -->
+                    <div class="p-3 bg-slate-900/40 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-slate-900/60 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-purple-400">175</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-purple-300/80">Duma (Pride)</h4>
+                                <p class="text-xxs text-slate-400">Przekonanie: "Sam dam radę", ukrywanie prawdy przed innymi i samym sobą.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-slate-500">Zasilanie Nałogu</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/40 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-slate-900/60 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-rose-400">150</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-rose-300/80">Złość (Anger)</h4>
+                                <p class="text-xxs text-slate-400">Frustracja spowodowana zakazami. Używasz nałogu, aby stłumić napięcie i złość.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-slate-500">Zasilanie Nałogu</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/40 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-slate-900/60 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-orange-400">125</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-orange-300/80">Pożądanie (Desire)</h4>
+                                <p class="text-xxs text-slate-400">Pogoń za zmysłową przyjemnością lub natychmiastowym zaspokojeniem. Wieczny głód.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-slate-500">Zasilanie Nałogu</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/40 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-slate-900/60 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-amber-400">100</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-amber-300/80">Strach (Fear)</h4>
+                                <p class="text-xxs text-slate-400">Lęk przed brakiem używki, lęk przed pustką bez niej. Ucieczka w znieczulenie.</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-slate-500">Zasilanie Nałogu</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 hover:bg-slate-900/60 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-center text-xs font-extrabold text-slate-400">50</span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-slate-300/70">Apatia (Apathy)</h4>
+                                <p class="text-xxs text-slate-400">Beznadzieja. Poczucie bezsilności wobec uzależnienia. "Nigdy z tego nie wyjdę".</p>
+                            </div>
+                        </div>
+                        <span class="text-xxs uppercase tracking-wider text-slate-500">Zasilanie Nałogu</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- KORZYŚCI -->
-        <section class="bg-gradient-to-tr from-slate-50 to-indigo-50/30 rounded-3xl p-6 sm:p-10 border border-slate-100">
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight text-center mb-10">
-                Oczekiwane Rezultaty Praktyki Hawkinsa
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-sm flex gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-indigo-50 flex-shrink-0 flex items-center justify-center text-indigo-600 font-bold">
-                        1
+        <!-- -->
+        <!-- ZAKŁADKA 4: TEORIA I INSTRUKCJA -->
+        <section id="tab-theory" class="tab-content hidden space-y-6">
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6">
+                <div class="space-y-2 border-b border-slate-800 pb-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-white">Dlaczego tradycyjne rzucanie nałogu często zawodzi?</h3>
+                    <p class="text-slate-400 text-sm">Zrozumienie rewolucyjnej perspektywy dr. Hawkinsa.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed">
+                    <div class="space-y-4">
+                        <h4 class="text-base font-bold text-indigo-400"><i class="fa-solid fa-bolt mr-2"></i>Pułapka siły woli (Ego)</h4>
+                        <p class="text-sm text-slate-300">
+                            Większość metod walki z nałogiem opiera się na <strong>sile woli</strong>. Według Mapy Świadomości siła woli (zakorzeniona w Dumie lub Pożądaniu) to wciąż relatywnie niski poziom wibracyjny. Hawkins powtarza zasadę: <span class="text-purple-400 italic">"Siła napotyka siłę"</span>. 
+                        </p>
+                        <p class="text-sm text-slate-300">
+                            Próbując powstrzymać się siłą woli, stwarzasz ogromne napięcie (opór). Im bardziej tłumisz pragnienie, tym silniejsza staje się jego energia podświadoma, gotowa wybuchnąć przy najbliższym spadku odporności psychicznej.
+                        </p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-1">Cisza w wewnętrznym dialogu</h4>
-                        <p class="text-slate-600 text-xs sm:text-sm text-justify leading-relaxed">
-                            Ciągły, natrętny i krytyczny głos w Twojej głowie zaczyna cichnąć. Dlaczego? Ponieważ nie jest już napędzany wysokim ciśnieniem stłumionych, nieprzeżytych emocji.
+
+                    <div class="space-y-4">
+                        <h4 class="text-base font-bold text-emerald-400"><i class="fa-solid fa-leaf mr-2"></i>Uwolnienie źródła pragnienia</h4>
+                        <p class="text-sm text-slate-300">
+                            Technika Uwalniania uderza w samą <strong>przyczynę</strong> głodu. Nałóg nie jest problemem. Nałóg jest *rozwiązaniem*, które Twój umysł znalazł, aby poradzić sobie z nagromadzonym lękiem, smutkiem, złością czy poczuciem winy.
+                        </p>
+                        <p class="text-sm text-slate-300">
+                            Gdy za pomocą Techniki Uwalniania pozwolisz owej skrywanej emocji swobodnie zaistnieć i wyczerpiesz jej energię, fizyczne pragnienie i głód znikają same. Przestajesz potrzebować używki do poprawy swojego stanu, bo nie uciekasz już przed wewnętrznym cierpieniem.
                         </p>
                     </div>
                 </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-sm flex gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-emerald-50 flex-shrink-0 flex items-center justify-center text-emerald-600 font-bold">
-                        2
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-1">Zmiana domyślnego trybu życia</h4>
-                        <p class="text-slate-600 text-xs sm:text-sm text-justify leading-relaxed">
-                            Przestajesz automatycznie reagować lękiem lub złością na bodźce zewnętrzne. Zamiast tego zaczynasz odpowiadać z pozycji spokoju, elastyczności i kreatywnej neutralności.
-                        </p>
-                    </div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-sm flex gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-purple-50 flex-shrink-0 flex items-center justify-center text-purple-600 font-bold">
-                        3
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-1">Znaczna poprawa relacji</h4>
-                        <p class="text-slate-600 text-xs sm:text-sm text-justify leading-relaxed">
-                            Kiedy poprzez deprogramowanie odinstalujesz uciążliwy program ego pt. "Ja muszę mieć rację", Twoje relacje stają się głęboko harmonijne, oparte na wzajemnym zrozumieniu.
-                        </p>
-                    </div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-sm flex gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-pink-50 flex-shrink-0 flex items-center justify-center text-pink-600 font-bold">
-                        4
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-1">Zdrowie psychosomatyczne</h4>
-                        <p class="text-slate-600 text-xs sm:text-sm text-justify leading-relaxed">
-                            Chroniczne napięcie mięśniowe i stres (poziomy Siły) ustępują. Ciało odzyskuje optymalny poziom energii życiowej i wraca do naturalnego stanu homeostazy i witalności.
-                        </p>
-                    </div>
+
+                <div class="p-5 bg-slate-900 rounded-xl space-y-3 border border-slate-800">
+                    <h4 class="text-sm font-bold text-slate-200">Podstawowe kroki uwalniania (w pigułce):</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-xs text-slate-400">
+                        <li><strong class="text-slate-300">Zauważ impuls:</strong> Zamiast automatycznie po coś sięgać, zatrzymaj się na ułamek sekundy.</li>
+                        <li><strong class="text-slate-300">Zlokalizuj w ciele:</strong> Ignoruj myśli ("dlaczego tak mam", "to przez ten stres"). Przenieś całą uwagę na ucisk w klatce piersiowej, brzuchu czy gardle.</li>
+                        <li><strong class="text-slate-300">Poddaj opór:</strong> Pozwól tej energii po prostu tam być. Nie chciej jej zmienić. Uznaj, że to tylko bezpieczna energia fizyczna przechodząca przez Twoje ciało.</li>
+                        <li><strong class="text-slate-300">Uwolnij:</strong> Kiedy przestaniesz walczyć z odczuciem, ono zacznie samo opadać i naturalnie rozpuści się w przestrzeni Twojej wyższej świadomości.</li>
+                    </ol>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- -->
     <!-- STOPKA -->
-    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 text-center text-xs sm:text-sm">
-        <div class="max-w-6xl mx-auto px-4 space-y-4">
-            <p class="font-semibold text-slate-300">
-                David R. Hawkins — Praktyczny Przewodnik Integracyjny
-            </p>
-            <p class="max-w-md mx-auto text-slate-500 text-xs">
-                Materiały zebrane na tej stronie mają charakter wyłącznie edukacyjny i inspirowany literaturą dr. Hawkinsa ("Siła czy Moc", "Technika Uwalniania", "Przywracanie Zdrowia").
-            </p>
-            <p class="text-slate-600 text-xs pt-4">
-                &copy; 2026 Praktyka Uwalniania. Wszystkie prawa zastrzeżone.
-            </p>
+    <footer class="border-t border-slate-800/80 bg-slate-950 px-4 py-4 mt-10">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <div>
+                © 2026 Technika Uwalniania. Narzędzie oparte na publikacjach dr. Davida R. Hawkinsa.
+            </div>
+            <div class="flex items-center gap-4">
+                <span>"Prawda wyzwala."</span>
+                <i class="fa-solid fa-heart text-indigo-500/60 animate-pulse"></i>
+            </div>
         </div>
     </footer>
 
-    <!-- SKRYPTY INTERAKTYWNE -->
+    <!-- Informacja Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 px-4 py-3 rounded-xl bg-slate-900 border border-indigo-500 text-slate-200 text-xs font-semibold shadow-2xl flex items-center gap-2">
+        <i class="fa-solid fa-circle-info text-indigo-400"></i>
+        <span id="toast-message">Zapisano pomyślnie!</span>
+    </div>
+
+    <!-- -->
+    <!-- JAVASCRIPT LOGIKA -->
     <script>
-        // --- 1. DANE INTERAKTYWNEJ MAPY ŚWIADOMOŚCI ---
-        const levelDetails = {
-            enlightenment: {
-                title: "Oświecenie / Pokój / Radość",
-                calibration: "540 - 1000",
-                badge: "Stan Transcendencji",
-                badgeColor: "bg-yellow-100 text-yellow-800",
-                viewLife: "Doskonałe / Kompletne",
-                viewGod: "Jedyny / Wszystko",
-                emotion: "Błogosławieństwo / Ekstaza",
-                process: "Czysta Świadomość",
-                desc: "Najwyższe dostępne człowiekowi stany egzystencji. Cechuje je absolutne poczucie jedności ze wszystkim co istnieje, całkowite wygaszenie ego oraz głęboki, niewzruszony wewnętrzny spokój. Ludzie kalibrujący na tym poziomie stają się wielkimi nauczycielami ludzkości i źródłem czystego wsparcia."
-            },
-            love: {
-                title: "Miłość (Bezwarunkowa)",
-                calibration: "500",
-                badge: "Stan Harmonii",
-                badgeColor: "bg-pink-100 text-pink-800",
-                viewLife: "Łagodne / Piękne",
-                viewGod: "Kochający / Miłosierny",
-                emotion: "Cześć / Uwielbienie",
-                process: "Objawienie / Rozszerzenie",
-                desc: "Nie jest to miłość o charakterze romantycznym czy emocjonalnym, która może szybko obrócić się w nienawiść. To stan bezwarunkowej życzliwości, opiekuńczości oraz przebaczenia. Poziom ten charakteryzuje się brakiem jakichkolwiek oczekiwań wobec innych oraz całkowitym zintegrowaniem z intuicją."
-            },
-            reason: {
-                title: "Rozsądek / Intelekt",
-                calibration: "400",
-                badge: "Stan Logiki",
-                badgeColor: "bg-sky-100 text-sky-850",
-                viewLife: "Zrozumiałe / Sensowne",
-                viewGod: "Mądry",
-                emotion: "Zrozumienie / Jasność",
-                process: "Abstrakcja / Konceptualizacja",
-                desc: "Poziom nauki, zaawansowanej medycyny, filozofii i czystej logiki. Pozwala na obiektywne przetwarzanie olbrzymich zasobów informacji bez emocjonalnego skrzywienia. Głównym ograniczeniem tego poziomu jest tendencja do nadmiernej analizy i niezdolność intelektu do rozwiązywania problemów czysto duchowych."
-            },
-            acceptance: {
-                title: "Akceptacja",
-                calibration: "350",
-                badge: "Stan Harmonii",
-                badgeColor: "bg-emerald-100 text-emerald-800",
-                viewLife: "Harmonijne",
-                viewGod: "Przepełniony Łaską",
-                emotion: "Przebaczenie",
-                process: "Wyjście poza dualizm",
-                desc: "Na tym poziomie człowiek przestaje obwiniać czynniki zewnętrzne (rząd, partnera, los) za swoją sytuację życiową. Bierze pełną i dojrzałą odpowiedzialność za to, co czuje i jak reaguje. Pojawia się głębokie zaufanie, że wszystko we Wszechświecie układa się w odpowiednim porządku."
-            },
-            willingness: {
-                title: "Ochota / Optymizm",
-                calibration: "310",
-                badge: "Stan Kreacji",
-                badgeColor: "bg-purple-100 text-purple-800",
-                viewLife: "Przyjazne / Pełne Szans",
-                viewGod: "Inspirujący",
-                emotion: "Nadzieja / Entuzjazm",
-                process: "Zaangażowanie / Intencjonalność",
-                desc: "Wspaniały poziom aktywności i szybkiego rozwoju osobistego. Osoby na tym poziomie są niezwykle pomocne, optymistycznie nastawione i otwarte na ciągłą naukę. Praca zawodowa przestaje być uciążliwym obowiązkiem, a porażki traktowane są jako wartościowe lekcje."
-            },
-            neutrality: {
-                title: "Neutralność",
-                calibration: "250",
-                badge: "Stan Elastyczności",
-                badgeColor: "bg-amber-100 text-amber-800",
-                viewLife: "Satysfakcjonujące",
-                viewGod: "Uwalniający",
-                emotion: "Zaufanie",
-                process: "Poddanie oporu",
-                desc: "Stan wolności od desperackiego przywiązania do konkretnego wyniku. Człowiek przestaje sztywno kontrolować życie: 'Jeśli nie dostanę tej pracy, to znajdę inną'. Jest to poziom niezwykle stabilny emocjonalnie, wolny od wzlotów i upadków."
-            },
-            courage: {
-                title: "Odwaga",
-                calibration: "200",
-                badge: "Punkt Przełomowy",
-                badgeColor: "bg-orange-100 text-orange-800",
-                viewLife: "Ekscytujące / Wyzwanie",
-                viewGod: "Umożliwiający",
-                emotion: "Potwierdzenie",
-                process: "Upełnomocnienie",
-                desc: "Krytyczny poziom na Mapie Świadomości. To na tym etapie następuje odejście od postawy ofiary (typowej dla stanów poniżej 200). Pojawia się prawdziwa siła witalna do stawiania czoła wyzwaniom życiowym, chęć do nauki oraz eksplorowania nowych ścieżek rozwoju."
-            },
-            pride: {
-                title: "Duma",
-                calibration: "175",
-                badge: "Stan Podziału",
-                badgeColor: "bg-amber-200/50 text-amber-900",
-                viewLife: "Wymagające / Prestiżowe",
-                viewGod: "Wymagający",
-                emotion: "Pogarda / Arogancja",
-                process: "Nadymanie ego",
-                desc: "Stan wysoce niestabilny, ponieważ opiera się na czynnikach zewnętrznych (status społeczny, posiadanie racji, religia). Łatwo z niego spaść w poczucie wstydu po utracie prestiżu. Prowadzi do polaryzacji społeczeństwa na 'my' i 'oni'."
-            },
-            anger: {
-                title: "Złość / Gniew",
-                calibration: "150",
-                badge: "Stan Agresji",
-                badgeColor: "bg-red-100 text-red-800",
-                viewLife: "Wrogie",
-                viewGod: "Mściwy",
-                emotion: "Nienawiść",
-                process: "Destrukcja / Walka",
-                desc: "Niezaspokojone pożądanie i frustracja rodzą złość. Choć złość bywa destrukcyjna i prowadzi do nienawiści, ma w sobie więcej energii życiowej niż apatia. Może być konstruktywnym motorem, który wyrywa człowieka z bezczynności i pcha do buntu i działania."
-            },
-            desire: {
-                title: "Pożądanie / Żądza",
-                calibration: "125",
-                badge: "Stan Uzależnienia",
-                badgeColor: "bg-orange-100 text-orange-900",
-                viewLife: "Rozczarowujące / Puste",
-                viewGod: "Niedostępny",
-                emotion: "Nienasycenie",
-                process: "Chęć posiadania",
-                desc: "Poziom ciągłego głodu, konsumpcjonizmu i różnorodnych uzależnień. Człowiek żyje w ciągłej iluzji: 'Kiedy zdobędę ten samochód/partnera/pieniądze, dopiero wtedy będę szczęśliwy'. Każde osiągnięcie celu przynosi tylko chwilową ulgę, po której następuje kolejne pragnienie."
-            },
-            fear: {
-                title: "Strach",
-                calibration: "100",
-                badge: "Stan Zagrożenia",
-                badgeColor: "bg-slate-200 text-slate-800",
-                viewLife: "Zagrażające / Przerażające",
-                viewGod: "Karzący",
-                emotion: "Niepokój / Paranoja",
-                process: "Wycofanie / Unikanie",
-                desc: "Świat postrzegany jest jako niebezpieczne i pełne pułapek miejsce. Strach ogranicza potencjał życiowy, zmusza do ucieczki i rodzi paranoję. Jest jednym z najczęstszych narzędzi służących do manipulowania masami ludzkimi przez media i systemy kontroli."
-            },
-            lowvibrations: {
-                title: "Żal, Apatia, Wina, Wstyd",
-                calibration: "20 - 75",
-                badge: "Najniższe Wibracje",
-                badgeColor: "bg-red-200 text-red-950 font-bold",
-                viewLife: "Tragiczne / Beznadziejne",
-                viewGod: "Odrzucający / Potępiający",
-                emotion: "Samopotępienie / Nienawiść do siebie",
-                process: "Destrukcja / Wegetacja",
-                desc: "Zbiór najniższych stanów emocjonalnych. Żal (75) to ciągły smutek i poczucie straty. Apatia (50) to całkowity brak nadziei i poczucie totalnego bezwładu. Wina (30) manifestuje się jako samobiczowanie i pragnienie kary. Wstyd (20) to przekonanie o własnej bezwartościowości i chęć zniknięcia ze świata – stan bliski śmierci energetycznej."
-            }
+        // Dane do stanu sesji
+        let currentStep = 1;
+        let sessionData = {
+            habit: '',
+            intensityBefore: 7,
+            intensityAfter: 3,
+            emotion: '',
+            bodyLocation: '',
+            note: '',
+            timestamp: ''
         };
 
-        function selectLevel(levelKey) {
-            const data = levelDetails[levelKey];
-            const detailCard = document.getElementById('level-detail-card');
+        // Zmienne do asystenta oddechu
+        let breathingInterval = null;
+        let breathingPhase = 0; // 0 - wdech, 1 - wstrzymanie, 2 - wydech, 3 - wstrzymanie po wydechu
+
+        // Przełączanie zakładek
+        function switchTab(tabId) {
+            // Zatrzymaj oddech jeśli wychodzimy z procesu
+            if (tabId !== 'process') {
+                stopBreathingGuide();
+            }
+
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('block');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+
+            // Aktualizacja przycisków w menu
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-indigo-400');
+                btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800/50');
+            });
+            const activeBtn = document.getElementById(`btn-tab-${tabId}`);
+            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800/50');
+            activeBtn.classList.add('bg-slate-800', 'text-indigo-400');
+        }
+
+        // Automatyczne ustawienie presetu nawyku
+        function selectHabitPreset(habitName) {
+            document.getElementById('input-habit').value = habitName;
             
-            // Render card content
-            detailCard.innerHTML = `
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-widest ${data.badgeColor} px-2.5 py-1 rounded-lg">${data.badge}</span>
-                        <span class="text-3xl font-extrabold text-slate-900 font-mono">${data.calibration}</span>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-slate-900">${data.title}</h3>
-                        <p class="text-slate-500 text-sm mt-1">Szczegółowa charakterystyka pola świadomości:</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 text-xs sm:text-sm">
-                        <div class="bg-white p-3 rounded-xl border border-slate-150">
-                            <span class="text-slate-400 block mb-0.5">Widok Życia</span>
-                            <span class="font-semibold text-slate-800">${data.viewLife}</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl border border-slate-150">
-                            <span class="text-slate-400 block mb-0.5">Widok Boga</span>
-                            <span class="font-semibold text-slate-800">${data.viewGod}</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl border border-slate-150">
-                            <span class="text-slate-400 block mb-0.5">Emocja</span>
-                            <span class="font-semibold text-slate-800">${data.emotion}</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl border border-slate-150">
-                            <span class="text-slate-400 block mb-0.5">Proces</span>
-                            <span class="font-semibold text-slate-800">${data.process}</span>
-                        </div>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl border border-slate-150">
-                        <h4 class="font-semibold text-slate-900 text-sm mb-1.5">Charakterystyka:</h4>
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
-                            ${data.desc}
-                        </p>
-                    </div>
-                </div>
-                <p class="text-[11px] text-slate-400 mt-6 text-center">Dane na podstawie literatury dr. Davida R. Hawkinsa.</p>
-            `;
-
-            // Highlight item on the ladder
-            document.querySelectorAll('.map-item').forEach(el => {
-                el.classList.remove('ring-4', 'ring-indigo-500/40', 'ring-offset-1');
-            });
-            event.currentTarget.classList.add('ring-4', 'ring-indigo-500/40', 'ring-offset-1');
-        }
-
-        function filterMap(mode) {
-            const items = document.querySelectorAll('.map-item');
-            const btnAll = document.getElementById('btn-filter-all');
-            const btnPower = document.getElementById('btn-filter-power');
-            const btnForce = document.getElementById('btn-filter-force');
-
-            // Reset classes
-            [btnAll, btnPower, btnForce].forEach(btn => {
-                btn.className = "flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition text-slate-600 hover:text-slate-900";
-            });
-
-            if (mode === 'all') {
-                btnAll.className = "flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition bg-white text-slate-900 shadow-sm";
-                items.forEach(el => el.classList.remove('hidden'));
-            } else if (mode === 'power') {
-                btnPower.className = "flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition bg-white text-slate-900 shadow-sm";
-                items.forEach(el => {
-                    if (el.classList.contains('level-power')) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
-                });
-            } else if (mode === 'force') {
-                btnForce.className = "flex-1 py-2 px-4 rounded-lg font-semibold text-sm transition bg-white text-slate-900 shadow-sm";
-                items.forEach(el => {
-                    if (el.classList.contains('level-force')) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
-                });
-            }
-        }
-
-
-        // --- 2. LOGIKA ĆWICZENIA "NA ŻYWO" (KULA ENERGII) ---
-        const ball = document.getElementById('feeling-ball');
-        const statusText = document.getElementById('exercise-status');
-        const glowContainer = document.getElementById('glow-container');
-        const progressDots = document.getElementById('progress-dots').children;
-        
-        let currentStep = 0;
-        const meditationSteps = [
-            {
-                text: "Czuj fizyczne napięcie w ciele (np. ucisk w gardle, ścisk w klatce). Pozwól mu tam być, bez żadnej walki i oceniania.",
-                color: "from-rose-600 via-red-500 to-orange-500",
-                scale: 1,
-                buttonText: "ZAUWAŻAM"
-            },
-            {
-                text: "To tylko skumulowana, czysta energia biologiczna. Ignoruj myśli, nie analizuj historii 'dlaczego'. Skup się w 100% na fizycznym odczuciu.",
-                color: "from-orange-500 via-amber-500 to-indigo-500",
-                scale: 1.2,
-                buttonText: "ZAKOTWICZAM"
-            },
-            {
-                text: "Otwórz drzwi przed tą energią. Daj jej pełne, niczym nieograniczone prawo do istnienia. Przestań stawiać opór.",
-                color: "from-indigo-500 via-purple-500 to-emerald-500",
-                scale: 1.4,
-                buttonText: "POZWALAM BYĆ"
-            },
-            {
-                text: "Teraz weź głęboki, powolny oddech, rozluźnij ramiona i wyobraź sobie, jak energia kuli delikatnie rozpuszcza się w przestrzeni... (Kliknij, aby uwolnić)",
-                color: "from-emerald-400 via-teal-500 to-indigo-600",
-                scale: 1.6,
-                buttonText: "PUŚĆ"
-            }
-        ];
-
-        ball.addEventListener('click', () => {
-            if (currentStep < meditationSteps.length) {
-                const stepData = meditationSteps[currentStep];
-                
-                // Update text & classes
-                statusText.innerText = stepData.text;
-                ball.style.transform = `scale(${stepData.scale})`;
-                
-                // Change color dynamic gradient
-                ball.className = `energy-ball-active relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr ${stepData.color} shadow-lg transition-all duration-700 ease-out focus:outline-none flex items-center justify-center cursor-pointer`;
-                document.getElementById('ball-text').innerText = stepData.buttonText;
-
-                // Update dots progress
-                for (let i = 0; i < progressDots.length; i++) {
-                    if (i <= currentStep) {
-                        progressDots[i].className = "w-2.5 h-2.5 rounded-full bg-indigo-500 border border-indigo-400 transition-colors duration-300";
-                    } else {
-                        progressDots[i].className = "w-2.5 h-2.5 rounded-full bg-slate-700 border border-slate-600 transition-colors duration-300";
-                    }
+            // Wizualne zaznaczenie przycisku presetu
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('border-indigo-500', 'bg-indigo-950/20');
+                if(btn.innerText.includes(habitName.split(' ')[0])) {
+                    btn.classList.add('border-indigo-500', 'bg-indigo-950/20');
                 }
-                
-                currentStep++;
-            } else {
-                // RITUAL RELEASE ANIMATION (Particle burst)
-                createParticles();
-                
-                // Final state
-                ball.style.transform = `scale(0)`;
-                ball.style.opacity = '0';
-                statusText.innerHTML = "<span class='text-emerald-400 font-bold'>Ładunek został puszczony.</span> Czujesz większą przestrzeń i lekkość w ciele? Oddychaj spokojnie.";
-                document.getElementById('ball-text').innerText = "UWOLNIONE";
-            }
+            });
+        }
+
+        // Monitorowanie slidera intensywności
+        document.getElementById('input-intensity-before').addEventListener('input', (e) => {
+            document.getElementById('intensity-before-value').innerText = e.target.value;
+        });
+        document.getElementById('input-intensity-after').addEventListener('input', (e) => {
+            document.getElementById('intensity-after-value').innerText = e.target.value;
         });
 
-        function createParticles() {
-            const container = ball.parentElement;
-            for (let i = 0; i < 25; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle w-3 h-3 rounded-full bg-gradient-to-r from-emerald-400 to-indigo-400';
-                
-                // Random position & speed
-                const x = (Math.random() - 0.5) * 150;
-                const y = (Math.random() - 0.5) * 150;
-                particle.style.left = `calc(50% + ${x}px)`;
-                particle.style.top = `calc(50% + ${y}px)`;
-                particle.style.animationDelay = `${Math.random() * 0.3}s`;
-                
-                container.appendChild(particle);
-                
-                // Clean up DOM
-                setTimeout(() => {
-                    particle.remove();
-                }, 1500);
-            }
-        }
-
-        function resetExercise() {
-            currentStep = 0;
-            ball.style.transform = 'scale(1)';
-            ball.style.opacity = '1';
-            ball.className = 'energy-ball-active relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-rose-500 via-indigo-600 to-purple-500 shadow-[0_0_25px_rgba(167,139,250,0.3)] transition-all duration-700 ease-out focus:outline-none flex items-center justify-center cursor-pointer';
-            document.getElementById('ball-text').innerText = "POCZUJ";
-            statusText.innerText = "Zidentyfikuj napięcie w ciele. Kiedy będziesz gotowy/-a, kliknij kulę powyżej, aby przejść do kolejnego kroku...";
-            
-            // Reset dots
-            for (let i = 0; i < progressDots.length; i++) {
-                progressDots[i].className = "w-2.5 h-2.5 rounded-full bg-slate-700 border border-slate-600 transition-colors duration-300";
-            }
-            progressDots[0].className = "w-2.5 h-2.5 rounded-full bg-indigo-500 border border-indigo-400 transition-colors duration-300";
-        }
-
-
-        // --- 3. DZIENNIK UWALNIANIA (PROCES POWIADOMIENIA I LISTY WPISÓW) ---
-        function handleJournalSubmit(event) {
-            event.preventDefault();
-            
-            const inputVal = document.getElementById('journal-input').value;
-            const currentState = document.getElementById('journal-state').value;
-            const targetState = document.getElementById('journal-target').value;
-            const journalList = document.getElementById('journal-entries');
-            const emptyPlaceholder = document.getElementById('journal-empty');
-
-            if (!inputVal.trim()) return;
-
-            // Remove placeholder if present
-            if (emptyPlaceholder) {
-                emptyPlaceholder.remove();
-            }
-
-            // Create entry item
-            const entry = document.createElement('div');
-            entry.className = "p-3 bg-white rounded-xl border border-slate-150 shadow-sm flex items-center justify-between text-xs sm:text-sm animate-fade-in transition duration-300 transform hover:scale-[1.01]";
-            entry.innerHTML = `
-                <div class="space-y-1">
-                    <span class="text-slate-400 block text-[10px] uppercase font-mono">${new Date().toLocaleTimeString()}</span>
-                    <strong class="text-slate-800">${inputVal}</strong>
-                    <div class="flex items-center gap-1.5 text-[11px] mt-1">
-                        <span class="text-red-600 bg-red-50 px-1.5 py-0.5 rounded">${currentState}</span>
-                        <span class="text-slate-400">➔</span>
-                        <span class="text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">${targetState}</span>
-                    </div>
-                </div>
-                <button onclick="deleteEntry(this)" class="p-1.5 text-slate-400 hover:text-red-500 transition" title="Usuń wpis">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                </button>
-            `;
-
-            // Prepend new entry
-            journalList.insertBefore(entry, journalList.firstChild);
-
-            // Clear input field
-            document.getElementById('journal-input').value = "";
-
-            // Custom modal alerting about successful simulation
-            showCustomNotification(`Udało się! Twój umysł przetworzył i poddał intencję: "${inputVal}". Trzymaj ten stan.`);
-        }
-
-        function deleteEntry(btn) {
-            const entry = btn.parentElement;
-            entry.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                entry.remove();
-                
-                // Add placeholder back if list is empty
-                const journalList = document.getElementById('journal-entries');
-                if (journalList.children.length === 0) {
-                    journalList.innerHTML = `<p id="journal-empty" class="text-xs text-slate-400 italic text-center py-4">Brak wpisów w tej sesji. Wypełnij powyższy formularz.</p>`;
+        // Obsługa przechodzenia między krokami
+        function goToStep(stepNum) {
+            // Walidacja kroków przed przejściem
+            if (stepNum === 2) {
+                const habitInput = document.getElementById('input-habit').value.trim();
+                if (!habitInput) {
+                    showToast('Wpisz lub wybierz nawyk/nałóg, który chcesz uwolnić.');
+                    return;
                 }
-            }, 300);
+                sessionData.habit = habitInput;
+                sessionData.intensityBefore = parseInt(document.getElementById('input-intensity-before').value);
+            }
+
+            if (stepNum === 3 && !sessionData.emotion) {
+                showToast('Wybierz emocję, która kryje się pod głodem.');
+                return;
+            }
+
+            if (stepNum === 4 && !sessionData.bodyLocation) {
+                showToast('Zlokalizuj i wybierz obszar napięcia w ciele.');
+                return;
+            }
+
+            // Przełączanie kroków
+            document.querySelectorAll('.step-pane').forEach(pane => {
+                pane.classList.add('hidden');
+            });
+            document.getElementById(`step-${stepNum}`).classList.remove('hidden');
+
+            // Aktualizacja paska postępu
+            currentStep = stepNum;
+            document.getElementById('current-step-num').innerText = currentStep;
+            
+            const progressBar = document.getElementById('step-progress-bar');
+            progressBar.style.width = `${(currentStep / 5) * 100}%`;
+
+            const stepNames = {
+                1: 'Definiowanie Intencji',
+                2: 'Identyfikacja Emocji',
+                3: 'Lokalizacja w Ciele',
+                4: 'Proces Uwalniania',
+                5: 'Zakończenie i Pomiar'
+            };
+            document.getElementById('step-name').innerText = stepNames[currentStep];
+
+            // Aktywacja asystentów zależnie od kroku
+            if (currentStep === 4) {
+                startBreathingGuide();
+                resetQuestions();
+            } else {
+                stopBreathingGuide();
+            }
+
+            if (currentStep === 5) {
+                document.getElementById('summary-before-val').innerText = sessionData.intensityBefore;
+                document.getElementById('input-intensity-after').value = Math.max(0, sessionData.intensityBefore - 3);
+                document.getElementById('intensity-after-value').innerText = Math.max(0, sessionData.intensityBefore - 3);
+                document.getElementById('summary-after-val').innerText = Math.max(0, sessionData.intensityBefore - 3);
+            }
         }
 
-        // CUSTOM MODAL NOTIFICATION
-        function showCustomNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-slate-900 text-white rounded-2xl p-4 shadow-2xl border border-slate-800 flex items-start gap-3 transition-all duration-300 transform translate-y-10 opacity-0";
-            notification.innerHTML = `
-                <div class="p-1.5 bg-indigo-500/20 text-indigo-400 rounded-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <div class="flex-1">
-                    <h5 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-1">Dziennik Świadomości</h5>
-                    <p class="text-xs text-slate-300 leading-relaxed">${message}</p>
-                </div>
-                <button onclick="this.parentElement.remove()" class="text-slate-500 hover:text-white transition">
-                    &times;
-                </button>
-            `;
-            document.body.appendChild(notification);
+        // <!-- -->
+        // Wybór emocji-źródła
+        function selectEmotion(emotionTitle, emotionDesc) {
+            sessionData.emotion = emotionTitle;
+            
+            // Wizualna zmiana wyselekcjonowanej karty
+            document.querySelectorAll('.emotion-card').forEach(card => {
+                card.classList.remove('border-indigo-500', 'bg-indigo-950/20');
+                if (card.innerText.includes(emotionTitle.split(' ')[0])) {
+                    card.classList.add('border-indigo-500', 'bg-indigo-950/20');
+                }
+            });
 
-            // Animate in
-            setTimeout(() => {
-                notification.classList.remove('translate-y-10', 'opacity-0');
-            }, 10);
+            // Pokaż feedback na dole
+            const feedbackBox = document.getElementById('selected-emotion-feedback');
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('feedback-emotion-title').innerText = emotionTitle;
+            document.getElementById('feedback-emotion-desc').innerText = emotionDesc;
 
-            // Animate out
-            setTimeout(() => {
-                notification.classList.add('translate-y-10', 'opacity-0');
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            }, 6000);
+            // Odblokuj następny krok
+            const nextBtn = document.getElementById('btn-to-step-3');
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('bg-slate-800', 'text-slate-500', 'cursor-not-allowed');
+            nextBtn.classList.add('bg-indigo-600', 'hover:bg-indigo-500', 'text-white');
         }
+
+        // Wybór lokalizacji w ciele
+        function selectBodyLocation(locationName) {
+            sessionData.bodyLocation = locationName;
+
+            // Wizualna zmiana wyselekcjonowanego przycisku
+            document.querySelectorAll('.body-loc-btn').forEach(btn => {
+                btn.classList.remove('border-purple-500', 'bg-purple-950/20');
+                if (btn.innerText.includes(locationName.split(' ')[0])) {
+                    btn.classList.add('border-purple-500', 'bg-purple-950/20');
+                }
+            });
+
+            // Pokaż feedback
+            const feedbackBox = document.getElementById('selected-body-feedback');
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('feedback-body-text').innerText = locationName;
+
+            // Odblokuj przycisk
+            const nextBtn = document.getElementById('btn-to-step-4');
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('bg-slate-800', 'text-slate-500', 'cursor-not-allowed');
+            nextBtn.classList.add('bg-indigo-600', 'hover:bg-indigo-500', 'text-white');
+        }
+
+        // <!-- -->
+        // Asystent oddechowy (4-4-4-4 - Box Breathing dla uspokojenia układu nerwowego)
+        function startBreathingGuide() {
+            stopBreathingGuide();
+            breathingPhase = 0;
+            const circle = document.getElementById('breathing-circle');
+            const statusText = document.getElementById('breathing-status');
+            const instructionText = document.getElementById('breathing-instruction');
+            const icon = document.getElementById('breathing-icon');
+
+            function runCycle() {
+                if (breathingPhase === 0) { // Wdech
+                    circle.className = "breathing-ring absolute w-28 h-28 rounded-full breath-inhale flex items-center justify-center";
+                    statusText.innerText = "WDECH...";
+                    statusText.className = "text-lg font-bold text-indigo-400 mb-1";
+                    instructionText.innerText = "Rób powolny wdech nosem, rozszerzając brzuch. Śledź energię w ciele.";
+                    icon.className = "fa-solid fa-chevron-up text-white text-lg animate-bounce";
+                    breathingPhase = 1;
+                } else if (breathingPhase === 1) { // Wstrzymanie
+                    circle.className = "breathing-ring absolute w-28 h-28 rounded-full breath-hold flex items-center justify-center";
+                    statusText.innerText = "ZATRZYMAJ...";
+                    statusText.className = "text-lg font-bold text-purple-400 mb-1";
+                    instructionText.innerText = "Zatrzymaj powietrze. Skup się na fizycznym punkcie napięcia bez walki.";
+                    icon.className = "fa-solid fa-pause text-white text-lg";
+                    breathingPhase = 2;
+                } else if (breathingPhase === 2) { // Wydech
+                    circle.className = "breathing-ring absolute w-28 h-28 rounded-full breath-exhale flex items-center justify-center";
+                    statusText.innerText = "WYDECH / PODDANIE...";
+                    statusText.className = "text-lg font-bold text-blue-400 mb-1";
+                    instructionText.innerText = "Wypuszczaj powietrze ustami. Puszczaj fizyczny opór. Pozwól energii odpłynąć.";
+                    icon.className = "fa-solid fa-chevron-down text-white text-lg";
+                    breathingPhase = 3;
+                } else if (breathingPhase === 3) { // Przerwa
+                    circle.className = "breathing-ring absolute w-28 h-28 rounded-full flex items-center justify-center";
+                    statusText.innerText = "PUSTKA...";
+                    statusText.className = "text-lg font-bold text-slate-400 mb-1";
+                    instructionText.innerText = "Zatrzymaj po wydechu. Pozwól sobie po prostu być w tej pustce.";
+                    icon.className = "fa-solid fa-wind text-white text-lg";
+                    breathingPhase = 0;
+                }
+            }
+
+            runCycle();
+            breathingInterval = setInterval(runCycle, 4000);
+        }
+
+        function stopBreathingGuide() {
+            if (breathingInterval) {
+                clearInterval(breathingInterval);
+                breathingInterval = null;
+            }
+        }
+
+        // <!-- -->
+        // Interaktywne pytania uwalniające
+        let questionsAnswered = 0;
+
+        function resetQuestions() {
+            questionsAnswered = 0;
+            
+            // Resetuj visuale pytań
+            for (let i = 1; i <= 4; i++) {
+                const box = document.getElementById(`q${i}-box`);
+                const btn = document.getElementById(`q${i}-btn`);
+                
+                if (i === 1) {
+                    box.classList.remove('opacity-50');
+                    btn.removeAttribute('disabled');
+                    btn.className = "px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-semibold rounded-lg transition-colors";
+                    btn.innerText = "Tak";
+                } else {
+                    box.classList.add('opacity-50');
+                    btn.setAttribute('disabled', 'true');
+                    btn.className = "px-3 py-1 bg-slate-800 text-slate-500 text-xs font-semibold rounded-lg cursor-not-allowed";
+                    btn.innerText = "Tak";
+                }
+            }
+
+            // Zablokuj przycisk Dalej
+            const nextBtn = document.getElementById('btn-to-step-5');
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.className = "px-6 py-2.5 bg-slate-800 text-slate-500 font-medium rounded-xl cursor-not-allowed transition-all duration-200 flex items-center gap-2";
+        }
+
+        function answerQuestion(qNum) {
+            const currentBtn = document.getElementById(`q${qNum}-btn`);
+            currentBtn.innerText = "✓ Poddane";
+            currentBtn.className = "px-3 py-1 bg-emerald-500 text-white text-xs font-semibold rounded-lg pointer-events-none";
+            
+            questionsAnswered = qNum;
+
+            if (qNum < 4) {
+                const nextNum = qNum + 1;
+                const nextBox = document.getElementById(`q${nextNum}-box`);
+                const nextBtn = document.getElementById(`q${nextNum}-btn`);
+                
+                nextBox.classList.remove('opacity-50');
+                nextBtn.removeAttribute('disabled');
+                nextBtn.className = "px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-semibold rounded-lg transition-colors";
+            } else {
+                // Odblokowanie przejścia do kroku 5
+                const nextBtn = document.getElementById('btn-to-step-5');
+                nextBtn.removeAttribute('disabled');
+                nextBtn.className = "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl transition-all duration-200 flex items-center gap-2 animate-pulse";
+                showToast('Świetnie! Przejdź do podsumowania sesji.');
+            }
+        }
+
+        // <!-- -->
+        // Rozpoczęcie nowej sesji (reset)
+        function startNewSession() {
+            currentStep = 1;
+            sessionData = {
+                habit: '',
+                intensityBefore: 7,
+                intensityAfter: 3,
+                emotion: '',
+                bodyLocation: '',
+                note: '',
+                timestamp: ''
+            };
+            
+            // Reset inputów
+            document.getElementById('input-habit').value = '';
+            document.getElementById('input-intensity-before').value = 7;
+            document.getElementById('intensity-before-value').innerText = 7;
+            document.getElementById('session-note').value = '';
+
+            // Reset presetów
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('border-indigo-500', 'bg-indigo-950/20');
+            });
+
+            // Ukrycie feedbacków
+            document.getElementById('selected-emotion-feedback').classList.add('hidden');
+            document.getElementById('selected-body-feedback').classList.add('hidden');
+
+            // Reset kart emocji i lokalizacji w ciele
+            document.querySelectorAll('.emotion-card').forEach(card => card.classList.remove('border-indigo-500', 'bg-indigo-950/20'));
+            document.querySelectorAll('.body-loc-btn').forEach(btn => btn.classList.remove('border-purple-500', 'bg-purple-950/20'));
+
+            switchTab('process');
+            goToStep(1);
+        }
+
+        // Zapisywanie sesji w LocalStorage
+        function saveAndCompleteSession() {
+            sessionData.intensityAfter = parseInt(document.getElementById('input-intensity-after').value);
+            sessionData.note = document.getElementById('session-note').value.trim();
+            sessionData.timestamp = new Date().toLocaleString('pl-PL');
+
+            let history = JSON.parse(localStorage.getItem('hawkins_release_history')) || [];
+            history.unshift(sessionData); // Dodaj na początku
+            localStorage.setItem('hawkins_release_history', JSON.stringify(history));
+
+            showToast('Sesja zapisana! Poczuj wdzięczność za ten krok.');
+            updateStatsAndHistory();
+            switchTab('dashboard');
+        }
+
+        // Czyszczenie historii
+        function clearHistory() {
+            if (confirm('Czy na pewno chcesz usunąć całą historię sesji? Ta operacja jest nieodwracalna.')) {
+                localStorage.removeItem('hawkins_release_history');
+                updateStatsAndHistory();
+                showToast('Historia została wyczyszczona.');
+            }
+        }
+
+        // Odświeżanie statystyk i widoku historii
+        function updateStatsAndHistory() {
+            const history = JSON.parse(localStorage.getItem('hawkins_release_history')) || [];
+            
+            // Statystyka: Liczba sesji
+            document.getElementById('stat-sessions-count').innerText = history.length;
+
+            // Statystyka: Średni spadek napięcia
+            if (history.length > 0) {
+                let totalDiff = 0;
+                history.forEach(session => {
+                    const diff = session.intensityBefore - session.intensityAfter;
+                    const percent = (diff / session.intensityBefore) * 100;
+                    totalDiff += percent;
+                });
+                const avg = Math.round(totalDiff / history.length);
+                document.getElementById('stat-avg-relief').innerText = `${avg}%`;
+            } else {
+                document.getElementById('stat-avg-relief').innerText = `0%`;
+            }
+
+            // Statystyka: Ostatnio uwalniana emocja
+            if (history.length > 0 && history[0].emotion) {
+                const rawEmotion = history[0].emotion.split(' ')[0];
+                document.getElementById('stat-last-emotion').innerText = rawEmotion;
+            } else {
+                document.getElementById('stat-last-emotion').innerText = '-';
+            }
+
+            // Generowanie widoku historii
+            const container = document.getElementById('history-container');
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-slate-500">
+                        <i class="fa-regular fa-folder-open text-3xl mb-2 block"></i>
+                        Nie zarejestrowano jeszcze żadnej sesji. Kliknij "Rozpocznij Uwalnianie" powyżej, aby zacząć.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = history.map((session, index) => {
+                const relief = session.intensityBefore - session.intensityAfter;
+                const reliefPercent = Math.round((relief / session.intensityBefore) * 100);
+                
+                return `
+                    <div class="p-4 bg-slate-900/80 border border-slate-800 rounded-xl space-y-3 hover:border-slate-700 transition-all">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/60 pb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-indigo-500/10 text-indigo-400 text-xs font-semibold rounded border border-indigo-500/20">
+                                    ${session.habit}
+                                </span>
+                                <span class="text-xxs text-slate-500">${session.timestamp}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs">
+                                <span class="text-slate-400">Ulga:</span>
+                                <span class="font-extrabold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                                    -${relief} pkt (${reliefPercent}%)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <div>
+                                <span class="text-slate-500 uppercase text-xxs block">Źródłowa Emocja</span>
+                                <span class="text-slate-200 font-medium">${session.emotion}</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 uppercase text-xxs block">Obszar w Ciele</span>
+                                <span class="text-slate-200 font-medium">${session.bodyLocation}</span>
+                            </div>
+                        </div>
+
+                        ${session.note ? `
+                            <div class="text-xs bg-slate-950/40 p-2.5 rounded-lg border border-slate-900 italic text-slate-300">
+                                "${session.note}"
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Komunikaty Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Start aplikacji na załadowanie okna
+        window.onload = function() {
+            updateStatsAndHistory();
+        };
     </script>
 </body>
 </html>
